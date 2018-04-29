@@ -15,6 +15,7 @@ class game():
 		self.n=-1
 		self.n1=-1
 		self.fruit_number=0
+		self._fruit_number=[0]
 		self.i=-1
 		self.i1=-1
 
@@ -22,6 +23,8 @@ class game():
 
 		self.grid()
 		self.snake()
+		self.add_fruits()
+		self.add_fruits()
 		self.add_fruits()
 		self.snake_move()
 
@@ -41,31 +44,31 @@ class game():
 		self.canvas.create_oval(self.canvasWidth/2-self.margin,self.canvasHeight/2-self.margin+self.margin,
 								self.canvasWidth/2+self.margin,self.canvasHeight/2+self.margin+self.margin,
 								tags='snake'+str(self.n+1))
-	def add_lenght(self,event):
-		x1, y1, x2, y2 = self.canvas.coords('snake'+str(self.n+1))
+	def add_lenght(self):
+		x1, y1, x2, y2 = self.canvas.coords('snake'+str(self.n))
 
 		self.n+=1
 
 		if self.move==1:
 			self.canvas.create_oval(x1-self.margin/2-2,y1,
 									x2-self.margin/2-2,y2,
-									tags='snake'+str(self.n+1),fill='red')
+									tags='snake'+str(self.n),fill='red')
 
 		elif self.move==2:
 			self.canvas.create_oval(x1+self.margin/2+2,y1,
 									x2+self.margin/2+2,y2,
-									tags='snake'+str(self.n+1),fill='blue')
+									tags='snake'+str(self.n),fill='blue')
 		
 		elif self.move==3:
 			self.canvas.create_oval(x1,y1-self.margin/2-2,
 									x2,y2-self.margin/2-2,
-									tags='snake'+str(self.n+1),fill='green')
+									tags='snake'+str(self.n),fill='green')
 		
 
 		elif self.move==4:
 			self.canvas.create_oval(x1,y1+self.margin/2+2,
 									x2,y2+self.margin/2+2,
-									tags='snake'+str(self.n+1),fill='black')
+									tags='snake'+str(self.n),fill='black')
 	def add_fruits(self):
 
 		x1=random.randrange(0+self.margin*3+1, self.canvasWidth-self.margin*3-1,self.margin)
@@ -73,6 +76,7 @@ class game():
 
 		self.canvas.create_oval(x1-self.margin,y1-self.margin,x1+self.margin,y1+self.margin,fill='orange',tags='fruit'+str(self.fruit_number))
 		self.fruit_number+=1
+		self._fruit_number.append(self.fruit_number)
 
 	def snake_move(self):
 
@@ -100,14 +104,15 @@ class game():
 								self.canvas.delete('snake'+str(x))
 							self.i=i
 			#zjedenie ovocia
-			tagged_objects1 = self.canvas.find_withtag('fruit'+str(self.fruit_number-1))
-			overlapping_objects1 = self.canvas.find_overlapping(*self.canvas.coords('snake'+str(self.n)))
+			for i in range(len(self._fruit_number)):
+				tagged_objects1 = self.canvas.find_withtag('fruit'+str(self._fruit_number[i]))
+				overlapping_objects1 = self.canvas.find_overlapping(*self.canvas.coords('snake'+str(self.n)))
 
-			for item in overlapping_objects1:
-				if item in tagged_objects1:
-					self.add_lenght()
-					self.canvas.delete('fruit'+str(self.fruit_number-1))
-					self.add_fruits()
+				for item in overlapping_objects1:
+					if item in tagged_objects1:
+						self.add_lenght()
+						self.canvas.delete('fruit'+str(self._fruit_number[i]))
+						self.add_fruits()
 
 			if x1<=0+self.margin*2-1 or x2>=self.canvasWidth-self.margin*2+1 or y1<=0+self.margin*6-1 or y2 >=self.canvasHeight-self.margin*2+1:
 				if self.control==1:
@@ -180,27 +185,27 @@ class game():
 			if self.move!=2:
 				self.move=1
 				self._control=1
-				self.canvas.after(91,self.pause_for_moving)
+				self.canvas.after(90,self.pause_for_moving)
 
 	def moveright(self,event):
 		if self._control==0:
 			if self.move!=1:
 				self.move=2
 				self._control=1
-				self.canvas.after(91,self.pause_for_moving)
+				self.canvas.after(90,self.pause_for_moving)
 
 	def moveup(self,event):
 		if self._control==0:
 			if self.move!=4:
 				self.move=3
 				self._control=1
-				self.canvas.after(91,self.pause_for_moving)
+				self.canvas.after(90,self.pause_for_moving)
 
 	def movedown(self,event):
 		if self._control==0:
 			if self.move!=3:
 				self.move=4
 				self._control=1
-				self.canvas.after(91,self.pause_for_moving)
+				self.canvas.after(90,self.pause_for_moving)
 
 game()

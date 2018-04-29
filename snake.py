@@ -2,8 +2,8 @@ import tkinter,random,time
 class game():
 
 	def __init__(self):
-		self.canvasWidth=1500
-		self.canvasHeight=900
+		self.canvasWidth=900
+		self.canvasHeight=800
 
 		self.canvas=tkinter.Canvas(width=self.canvasWidth,height=self.canvasHeight,bg='white')
 		self.canvas.pack()
@@ -55,7 +55,7 @@ class game():
 
 		self.snake()
 
-		for i in range(50):	
+		for i in range(35):	
 			self.obstacles()
 		
 		for i in range(3):

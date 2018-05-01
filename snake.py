@@ -54,8 +54,9 @@ class game():
 		self._grid=self.canvas.create_rectangle(0+self.margin*2-1,0+self.margin*6-1,self.canvasWidth-self.margin*2+1,self.canvasHeight-self.margin*2+1,tags='grid')
 
 		self.snake()
-
-		for i in range(35):	
+		n=(int((self.canvasHeight/100)*(self.canvasWidth)/100))//2
+		print(n)
+		for i in range(int(n)):	
 			self.obstacles()
 		
 		for i in range(3):
@@ -253,7 +254,7 @@ class game():
 			if self.move!=2:
 				self.move=1
 				self._control=1
-				self.canvas.after(90,self.pause_for_moving)
+				self.canvas.after(35,self.pause_for_moving)
 
 
 	def moveright(self,event):
@@ -261,20 +262,20 @@ class game():
 			if self.move!=1:
 				self.move=2
 				self._control=1
-				self.canvas.after(90,self.pause_for_moving)
+				self.canvas.after(35,self.pause_for_moving)
 
 	def moveup(self,event):
 		if self._control==0:
 			if self.move!=4:
 				self.move=3
 				self._control=1
-				self.canvas.after(90,self.pause_for_moving)
+				self.canvas.after(35,self.pause_for_moving)
 
 	def movedown(self,event):
 		if self._control==0:
 			if self.move!=3:
 				self.move=4
 				self._control=1
-				self.canvas.after(90,self.pause_for_moving)
+				self.canvas.after(35,self.pause_for_moving)
 
 game()

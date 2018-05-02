@@ -2,8 +2,8 @@ import tkinter,random,time
 class game():
 
 	def __init__(self):
-		self.canvasWidth=900
-		self.canvasHeight=800
+		self.canvasWidth=1500
+		self.canvasHeight=900
 
 		self.canvas=tkinter.Canvas(width=self.canvasWidth,height=self.canvasHeight,bg='white')
 		self.canvas.pack()
@@ -218,28 +218,28 @@ class game():
 					self.canvas.after(35,self.snake_move)
 
 					if self.move==1:
-						self.canvas.create_oval(x1-self.margin/2-2,y1,
-												x2-self.margin/2-2,y2,
+						self.canvas.create_oval(x1-self.margin/3-2,y1,
+												x2-self.margin/3-2,y2,
 												tags='snake'+str(self.n+1),fill='blue')
 					
 						self.canvas.delete('snake'+str(self.i))
 
 					elif self.move==2:
-						self.canvas.create_oval(x1+self.margin/2+2,y1,
-												x2+self.margin/2+2,y2,
+						self.canvas.create_oval(x1+self.margin/3+2,y1,
+												x2+self.margin/3+2,y2,
 												tags='snake'+str(self.n+1),fill='blue')
 					
 						self.canvas.delete('snake'+str(self.i))
 					elif self.move==3:
-						self.canvas.create_oval(x1,y1-self.margin/2-2,
-												x2,y2-self.margin/2-2,
+						self.canvas.create_oval(x1,y1-self.margin/3-2,
+												x2,y2-self.margin/3-2,
 												tags='snake'+str(self.n+1),fill='blue')
 					
 						self.canvas.delete('snake'+str(self.i))
 
 					elif self.move==4:
-						self.canvas.create_oval(x1,y1+self.margin/2+2,
-												x2,y2+self.margin/2+2,
+						self.canvas.create_oval(x1,y1+self.margin/3+2,
+												x2,y2+self.margin/3+2,
 												tags='snake'+str(self.n+1),fill='blue')
 					
 						self.canvas.delete('snake'+str(self.i))
@@ -254,7 +254,7 @@ class game():
 			if self.move!=2:
 				self.move=1
 				self._control=1
-				self.canvas.after(35,self.pause_for_moving)
+				self.canvas.after(120,self.pause_for_moving)
 
 
 	def moveright(self,event):
@@ -262,20 +262,20 @@ class game():
 			if self.move!=1:
 				self.move=2
 				self._control=1
-				self.canvas.after(35,self.pause_for_moving)
+				self.canvas.after(120,self.pause_for_moving)
 
 	def moveup(self,event):
 		if self._control==0:
 			if self.move!=4:
 				self.move=3
 				self._control=1
-				self.canvas.after(35,self.pause_for_moving)
+				self.canvas.after(120,self.pause_for_moving)
 
 	def movedown(self,event):
 		if self._control==0:
 			if self.move!=3:
 				self.move=4
 				self._control=1
-				self.canvas.after(35,self.pause_for_moving)
+				self.canvas.after(120,self.pause_for_moving)
 
 game()
